@@ -23,6 +23,7 @@ var butterflyRouter = require('./routes/butterfly');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var butterfly = require("./models/butterfly");
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -30,11 +31,11 @@ async function recreateDB(){
   // Delete everything
   await butterfly.deleteMany();
   let instance1 = new
-  butterfly({butterfly_color:"Red",butterfly_breed:"Monarch butterfly",butterfly_price:5000});
+  butterfly({butterfly_color:"grey",butterfly_breed:"Eastern Gray butterfly",butterfly_price:6000});
   let instance2 = new
-  butterfly({butterfly_color:"Black",butterfly_breed:"Cassandra butterfly",butterfly_price:5500});
+  butterfly({butterfly_color:"red",butterfly_breed:"American Red butterfly",butterfly_price:6500});
   let instance3 = new
-  butterfly({butterfly_color:"Grey",butterfly_breed:"Saga butterfly",butterfly_price:6000});
+  butterfly({butterfly_color:"brown",butterfly_breed:"Fox butterfly",butterfly_price:7000});
   instance1.save().then(doc=>{
     console.log("First object saved")}
     ).catch(err=>{
@@ -69,11 +70,17 @@ app.use('/users', usersRouter);
 app.use('/butterfly', butterflyRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(500));
+});
+
 
 // error handler
 app.use(function(err, req, res, next) {

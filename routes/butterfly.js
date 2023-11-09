@@ -4,4 +4,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('butterfly', { title: 'Search Results butterfly' });
 });
+var express = require('express');
+const butterfly_controlers= require('../controllers/butterfly');
+var router = express.Router();
+/* GET butterflys */
+router.get('/', butterfly_controlers.butterfly_view_all_Page );
 module.exports = router;
+

@@ -2,12 +2,13 @@ extends layout
 block content
     div(class="container-fluid")
         h1= title
-    - let results=[{butterfly_color:"Red",butterfly_breed:"Monarch butterfly",butterfly_price:5000},{butterfly_color:"Black",butterfly_breed:"Cassandra butterfly",butterfly_price:5500},{butterfly_color:"Grey",butterfly_breed:"Saga butterfly",butterfly_price:6000}]
+        - let items = results;
+        - let o;
         div(class="row")
             each form,item in results
-                div(class = "col-sm-2 bg-danger" onclick=`buy(${item})`) #{form.butterfly_color}              
-                div(class = "col-sm-2 bg-danger" onclick=`buy(${item})`) #{form.butterfly_breed}                
-                div(class = "col-sm-2 bg-danger" onclick=`buy(${item})`) #{form.butterfly_price}
+                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_color}              
+                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_breed}                
+                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_price}
                 hr
     script.
         function buy(itemNo)
