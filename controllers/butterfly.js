@@ -10,10 +10,7 @@ exports.butterfly_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
-// for a specific butterfly.
-exports.butterfly_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: butterfly detail: ' + req.params.id);
-};
+
 // Handle butterfly create on POST.
 exports.butterfly_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: butterfly create POST');
@@ -58,5 +55,15 @@ exports.butterfly_view_all_Page = async function(req, res) {
         res.send(`{"error": ${err}}`);
         }
        }
-    
+       // for a specific butterfly.
+       exports.butterfly_detail = async function(req, res) {
+       console.log("detail" + req.params.id)
+       try {
+       result = await butterfly.findById( req.params.id)
+       res.send(result)
+       } catch (error) {
+       res.status(500)
+       res.send(`{"error": document for id ${req.params.id} not found`);
+       }
+       };    
     
