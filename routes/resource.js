@@ -8,15 +8,15 @@ var butterfly_controller = require('../controllers/butterfly');
 router.get('/', api_controller.api);
 /// butterfly ROUTES ///
 // POST request for creating a butterfly.
-router.post('/butterflys', butterfly_controller.butterfly_create_post);
+router.post('/butterfly', butterfly_controller.butterfly_create_post);
 // DELETE request to delete butterfly.
-router.delete('/butterflys/:id', butterfly_controller.butterfly_delete);
+router.delete('/butterfly/:id', butterfly_controller.butterfly_delete);
 // PUT request to update butterfly.
-router.put('/butterflys/:id', butterfly_controller.butterfly_update_put);
+router.put('/butterfly/:id', butterfly_controller.butterfly_update_put);
 // GET request for one butterfly.
-router.get('/butterflys/:id', butterfly_controller.butterfly_detail);
+router.get('/butterfly/:id', butterfly_controller.butterfly_detail);
 // GET request for list of all butterfly items.
-router.get('/butterflys', butterfly_controller.butterfly_list);
+router.get('/butterfly', butterfly_controller.butterfly_list);
 module.exports = router;
 //Handle Costume update form on PUT.
 exports.costume_update_put = async function(req, res) {

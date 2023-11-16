@@ -1,0 +1,20 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2(class="butterfly") No instance to view
+  else
+    - let butterfly_color = toShow.butterfly_color
+    - let butterfly_breed = toShow.butterfly_breed
+    - let butterfly_price = toShow.butterfly_price
+    div
+      div.row
+        div(class='butterflyAttr mr-3') Butterfly color is:
+        div #{butterfly_color}
+      div.row
+        div(class='butterflyAttr mr-3') Butterfly breed is:
+        div #{butterfly_breed}
+      div.row
+        div(class='butterflyAttr mr-3') Butterfly price is:
+        div #{butterfly_price}
+
