@@ -1,43 +1,57 @@
 extends layout
+
 block content
   h1= title
-  if (toShow == null)
+
+  if(toShow == null)
     h2 No instance to update
   else
     - let butterflyid = toShow._id
     - let butterfly_color = toShow.butterfly_color
     - let butterfly_breed = toShow.butterfly_breed
-    - let butterfly_price= toShow.butterfly_price
+    - let butterfly_price = toShow.butterfly_price
+    - let actionid = "/resource/butterflys/" + butterflyid
+    script let actionid = "#{actionid}"
     div.row(class='mb-2')
-      div.mr-1 ID is
-      div #{butterflyid}
-    - let actionid = "/resource/butterfly/" + butterflyid
-    - console.log(actionid+" "+butterflyid)
+    div.mr-1 ID is 
+      span(style="color:red")  #{butterflyid}
     form(id='butterflyForm', action= actionid, method="PUT")
       div.form-group
-        label.butterflyAttr(for='butterfly_color') butterfly color
-        input#butterfly_color(type='text', name='butterfly_color', value= butterfly_color )
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.butterflyAttr(for='butterfly_color',class="col-form-label") butterfly Colour
+        div(class="col-auto")
+          input#butterfly_color(type='text', name='butterfly_color',class="form-control", value=butterfly_color)
       div.form-group
-        label.butterflyAttr(for='butterfly_breed') butterfly breed
-        input#butterfly_breed(type='text', name='butterfly_breed', value= butterfly_breed )
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.butterflyAttr(for='butterfly_breed',class="col-form-label") butterfly Breed 
+        div(class="col-auto")
+          input#butterfly_breed(type='text', name='butterfly_breed',class="form-control", value=butterfly_breed)
       div.form-group
-        label.butterflyAttr(for='butterfly_price') butterfly price
-        input#butterfly_price(type='number', name='butterfly_price', value= butterfly_price )
-      input(type="submit")
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.butterflyAttr(for='butterfly_price',class="col-form-label") butterfly cost
+        div(class="col-auto")
+          input#butterfly_price(type='number', name='butterfly_price',class="form-control", value=butterfly_price)
+      input(class="btn btn-danger m-2" type="submit")
+        //- button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    
     script.
       document.forms['butterflyForm'].addEventListener('submit', (event) => {
-        event.preventDefault();
-        // TODO do something here to show user that form is being submitted
-        fetch(event.target.action, {
-          method: 'PUT',
-          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+       event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+       fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
         }).then((resp) => {
-          return resp.text(); // or resp.text() or whatever the server sends
+        return resp.json(); // or resp.text() or whatever the server sends
         }).then((body) => {
-          alert("Update succeded")
+        alert("Update succeded")
         // TODO handle body
         }).catch((error) => {
         // TODO handle error
-          alert("Update failed")
-        });
+        alert("Update failed " + error )
+       });
       });
