@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
-const butterflySchema = mongoose.Schema({
-butterfly_color: String,
-butterfly_breed: String,
-butterfly_price: Number
+const ButterflySchema = mongoose.Schema({
+Butterfly_color: String,
+Butterfly_breed: {type:String,length:15},
+Butterfly_price: {type:Number,min:1000,max:100000}
 })
-module.exports = mongoose.model("butterfly",
-butterflySchema)
+module.exports = mongoose.model("Butterfly",ButterflySchema)

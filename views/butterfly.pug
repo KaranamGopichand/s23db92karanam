@@ -3,20 +3,33 @@ block content
     div(class="container-fluid")
         h1= title
         - let items = results;
+        button.btn(class="btn-primary ml-1", onclick=`dispatch("/butterfly/create")`) Create
         - let o;
-        div(class="row")
-            each form,item in results
+        div(class="row m-1")
+            each form, item in results
                 - let destination = `dispatch(\"/butterfly/update?id=${form._id}\")`
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_color}              
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_breed}                
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.butterfly_price}
-                   button.btn( class="btn-primary ml-1", onclick= destination) Update
-                hr
+                div(class="row-sm-2 m-1")
+                    button.btn(class="btn-primary ml-1", onclick=`dispatch("/butterfly/update?id=${form._id}")`) Update
+                    button.btn(class="btn-primary ml-1", onclick=`deleteins("/butterfly/delete?id=${form._id}")`) Delete
+                    button.btn(class="btn-primary ml-1", onclick=`detailins("/butterfly/detail?id=${form._id}")`) Detail
+                    p Color is #{form.butterfly_color}
+                    p Breed is #{form.butterfly_breed}
+                    p Price is #{form.butterfly_price}
+
     script.
-        function dispatch(path){
-            window.location.href=path
+        function dispatch(path) {
+            window.location.href = path;
+            console.log(path,"path");
         }
-        function buy(itemNo)
-        {
-            alert(`You purchased Item ${itemNo+1}`)
+    script.
+        function deleteins(path) {
+            window.location.href = path;
+            console.log(path,"path");
         }
+    script.
+        function detailins(path) {
+            window.location.href = path;
+            console.log(path,"path");
+        }
+
+      
